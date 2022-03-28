@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 
+import * as React from 'react'
+import Card from './components/Card';
+import Header from './components/Header';
+
 function App() {
+  let [data, setData] = React.useState({})
+
+React.useEffect(function() {
+  fetch ("https://api.nasa.gov/planetary/apod?api_key=DqQITaM5PKo6ufuOgLlITZ32R4p3SScky7hzyORV")
+  .then(res => res.json())
+  .then(data => setData(data))
+}, []) 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <ol></ol>
+      <Card photo={ data }/>
     </div>
   );
 }
